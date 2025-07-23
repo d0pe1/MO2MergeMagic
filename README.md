@@ -1,127 +1,88 @@
-# 💀 Merge Patcher of Doom
+📦 MO2MergeMagic
 
-**Codex-Powered Mod Conflict Resolver for STALKER: Anomaly (G.A.M.M.A.)**
+Automated conflict-aware folder structure generator for Mod Organizer 2 (MO2).
 
-> Automate the extraction, structuring, and intelligent merging of Mod Organizer 2 (MO2) mod conflicts. Built for Lua, LTX, XML — designed for extensibility (Skyrim, Fallout, etc.).
+🚀 Overview
 
----
+MO2MergeMagic parses an MO2 profile and identifies file overrides and conflicts across all installed mods. It then builds a structured workspace where each conflicting file is organized per mod, ready for AI-assisted merging and patching.
 
-## 🚀 What This Does
+This enables:
 
-When your modpack grows to 500+ mods, manual patching becomes hell. This tool makes it sane.
+Clear visibility into conflict sources
 
-- Scans a MO2 instance and profile for file conflicts
-- Extracts each conflicting file into a structured folder layout
-- Copies all mod-contributed versions of that file into one place
-- Prepares the entire layout for AI-assisted merge resolution using OpenAI Codex or GPT
+Easy integration with tools like ChatGPT/Codex for automated merging
 
-Result: A fully structured, ready-to-merge patch workspace.
+Scalable workflows for massive mod packs (e.g., Skyrim, Anomaly)
 
----
+⚖️ Features
 
-## 🔧 Input
+Recursively scans the given MO2 profile
 
-### Required Parameters:
-- `--mo2-path`: Absolute path to the Mod Organizer 2 root directory
-- `--profile`: The name of the MO2 profile (inside `profiles/`)
+Detects overridden files and their originating mods
 
----
+Outputs a structured tree like:
 
-## 📁 Output
+merge_workspace/
+└── scripts/st_warfare.lua/
+    ├── OldWALO/scripts/st_warfare.lua
+    └── GammaPatch/scripts/st_warfare.lua
 
-A `merge_work/` folder is generated.
+Each mod’s version of a conflicting file is copied into its own subfolder under the file’s name.
 
-For each conflicting file in the virtual file system (VFS), a subfolder is created. Inside that folder are subfolders named after each mod that contributes a version of the file.
+⚙️ Quick Start
 
-Example:
+# Clone the repository
+git clone https://github.com/d0pe1/MO2MergeMagic.git
+cd MO2MergeMagic
 
-merge_work/
-└── gamedata/
-└── configs/
-└── st_warfare.xml/
-├── base-walo/
-│ └── st_warfare.xml
-├── gamma_patch/
-│ └── st_warfare.xml
-└── runtime/
-└── st_warfare.xml
+# Install dependencies
+pip install -r requirements.txt
 
-yaml
-Copy
-Edit
+# Run the tool
+python mo2_merge_magic.py \
+  --mo2-profile "/absolute/path/to/MO2/profiles/YourProfile" \
+  --output "merge_workspace"
 
-This format makes it trivial for AI agents or developers to inspect, diff, and intelligently merge changes.
+🧠 Codex Integration
 
----
+After running the tool, you’ll have a clean structure of conflicting files per mod. From here, Codex or GPT agents can:
 
-## 🧠 How To Use With Codex
+Read each subfolder
 
-Once your workspace is built, you can prompt Codex (or any LLM dev agent):
+Compare and merge files safely
 
-Read each folder in merge_work/.
-For each conflicting file:
+Add bugfixes, nil checks, logging, etc.
 
-Merge all versions from subfolders (sorted by mod load order)
+Output a single final merged file per conflict
 
-Preserve core logic unless stability improvements are obvious
+Prompt example:“Merge the versions of scripts/st_warfare.lua from each subfolder into one final version, maintaining original logic but applying stability and debug enhancements.”
 
-Apply nil guards, debug traces, safe iteration (ipairs), and function assertions
+🚣️ Roadmap
 
-Output the final merged file in merged_output/
+✅ MO2 profile parser
 
-yaml
-Copy
-Edit
+✅ Conflict detection + structure builder
 
-Want to go wild? Write `agents.md` to define LLM personas with domain logic (e.g. "AI Combat Tuner", "XML Weapon Balance Agent", "LTX Merge Sentinel").
+🛠️ Codex merge automation scripts
 
----
+🛠️ Skyrim ESP/ESM to JSON converter
 
-## 🛠️ Stack
+🛠️ AI-guided balance patch generator
 
-- **Python 3.10+**
-- MO2 VFS resolver
-- Lua 5.1 / LTX / XML support
-- Optional: Codex API or OpenAI CLI + `agents.md`
+🛠️ In-place mod injector for merged output
 
----
+🧰 Project Structure
 
-## 🧩 Use Cases
+├── mo2_merge_magic.py       # Core logic
+├── requirements.txt         # Python deps
+├── README.md                # This file
+└── ai_merge_agent/          # (planned) Codex helper scripts
 
-- STALKER Anomaly / GAMMA mod conflict resolution
-- Auto-patching weapon/AI/stat rebalance mods
-- Porting Warfare mode into Story mode safely
-- Skyrim/Fallout ESP/ESM merges (via future JSON decompiler integration)
-- Auto-generating `mod_patch.esm` or `patch_ltx.script` from 500 mods
+📜 License
 
----
+MIT — use freely, mod wisely, and may the Zone be kind.
 
-## 🧠 Agent Ideas
+🧪 Author
 
-- `LuaMergeAgent`: Merges `*.script` files with logic trace safety
-- `LTXBalancer`: Analyzes spawn/weapons/config values and merges intelligently
-- `SkyrimMergeBot`: Future ESP/ESM AI patcher for load orders
-- `CrashFixDaemon`: Adds nil guards and logs to lifecycle points
-- `StoryWarfareBridge`: Enables running warfare + story seamlessly
+Maintained by @d0pe1AI Whisperer: GPT-4o + Codex
 
----
-
-## 🧪 Roadmap
-
-- [x] Lua/LTX/XML STALKER merge support
-- [ ] Skyrim ESP/ESM merge via JSON decomp pipeline
-- [ ] Profile-aware auto-refactor system
-- [ ] Fully AI-driven modset autopatcher
-- [ ] Web GUI frontend
-
----
-
-## 🧬 Credits
-
-- 🧠 Project Lead: [@d0pe1](https://github.com/d0pe1)  
-- 🤖 AI Architect: Codex + GPT-4o  
-- 🔓 License: MIT
-
----
-
-> The days of dragging files in Windows Explorer are over. Merge your mods like a god.
