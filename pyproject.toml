@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=42"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "merge_magic"
+version = "0.1.0"
+authors = [
+  {name = "Merge Patcher of Doom"}
+]
+requires-python = ">=3.10"
+
+[project.scripts]
+merge-magic = "merge_magic.cli:main"
