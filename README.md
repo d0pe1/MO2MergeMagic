@@ -1,88 +1,114 @@
-📦 MO2MergeMagic
+# 🧠 MO2MergeMagic
 
-Automated conflict-aware folder structure generator for Mod Organizer 2 (MO2).
+> Automated, conflict-aware folder structure generator for **Mod Organizer 2 (MO2)** profiles.  
+> Built for **STALKER Anomaly, Skyrim, Fallout,** and other modding hellscapes.
 
-🚀 Overview
+---
 
-MO2MergeMagic parses an MO2 profile and identifies file overrides and conflicts across all installed mods. It then builds a structured workspace where each conflicting file is organized per mod, ready for AI-assisted merging and patching.
+## 🚀 What It Does
 
-This enables:
+MO2MergeMagic parses a given MO2 profile, identifies conflicting files across mods, and exports a neatly organized workspace.  
+Each conflicting file is placed into its own folder — with subfolders per mod that contains a version of that file.  
+This lets you compare, merge, and resolve conflicts with AI (e.g., ChatGPT / Codex) or by hand — fast.
 
-Clear visibility into conflict sources
+---
 
-Easy integration with tools like ChatGPT/Codex for automated merging
+## 🧩 Why This Exists
 
-Scalable workflows for massive mod packs (e.g., Skyrim, Anomaly)
+Mod conflict hell is real.
 
-⚖️ Features
+This tool makes it **visible, structured, and patchable.**
 
-Recursively scans the given MO2 profile
+Perfect for:
+- 🛠 Building final merged patches for massive load orders
+- 🤖 AI-assisted merging (Codex/GPT agents)
+- 🔍 Debugging file overrides
+- 💥 Surviving G.A.M.M.A., Requiem, or 400+ mod Frankenstein installs
 
-Detects overridden files and their originating mods
+---
 
-Outputs a structured tree like:
+## 🧪 Features
 
+- Recursively scans an MO2 profile
+- Detects all conflicting files across enabled mods
+- Creates a merge workspace like this:
+
+```
 merge_workspace/
 └── scripts/st_warfare.lua/
     ├── OldWALO/scripts/st_warfare.lua
     └── GammaPatch/scripts/st_warfare.lua
+```
 
-Each mod’s version of a conflicting file is copied into its own subfolder under the file’s name.
+---
 
-⚙️ Quick Start
+## ⚙️ How to Use
 
-# Clone the repository
+### 1. Clone the Repo
+
+```bash
 git clone https://github.com/d0pe1/MO2MergeMagic.git
 cd MO2MergeMagic
+```
 
-# Install dependencies
+### 2. Install Dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
-# Run the tool
+### 3. Run the Tool
+
+```bash
 python mo2_merge_magic.py \
   --mo2-profile "/absolute/path/to/MO2/profiles/YourProfile" \
   --output "merge_workspace"
+```
 
-🧠 Codex Integration
+---
 
-After running the tool, you’ll have a clean structure of conflicting files per mod. From here, Codex or GPT agents can:
+## 🧠 Codex/GPT Workflow
 
-Read each subfolder
+Once the merge workspace is generated:
 
-Compare and merge files safely
+- Each conflict is isolated in its own folder
+- Each mod’s version lives in a separate subfolder
+- GPT/Codex agents can:
+  - Analyze all versions
+  - Merge or rewrite files with logging, fixes, etc.
+  - Output a final clean `.lua`, `.ini`, `.xml`, `.txt`, or whatever
 
-Add bugfixes, nil checks, logging, etc.
+Use it as a base for an auto-patching pipeline or AI merge assistant.
 
-Output a single final merged file per conflict
+---
 
-Prompt example:“Merge the versions of scripts/st_warfare.lua from each subfolder into one final version, maintaining original logic but applying stability and debug enhancements.”
+## 📂 Project Structure
 
-🚣️ Roadmap
+```
+MO2MergeMagic/
+├── merge_magic/              # Core logic
+├── mo2_merge_magic.py        # CLI entry point
+├── codex.md                  # Codex prompt templates (optional)
+├── README.md
+├── pyproject.toml
+└── requirements.txt
+```
 
-✅ MO2 profile parser
+---
 
-✅ Conflict detection + structure builder
+## 🧊 Status
 
-🛠️ Codex merge automation scripts
+> Prototype-quality — works for STALKER Anomaly and similar flat folder structures.  
+> Skyrim & Fallout support coming soon. Patches welcome.
 
-🛠️ Skyrim ESP/ESM to JSON converter
+---
 
-🛠️ AI-guided balance patch generator
+## 📜 License
 
-🛠️ In-place mod injector for merged output
+MIT. Use, fork, build, AI-patch the planet.
 
-🧰 Project Structure
+---
 
-├── mo2_merge_magic.py       # Core logic
-├── requirements.txt         # Python deps
-├── README.md                # This file
-└── ai_merge_agent/          # (planned) Codex helper scripts
+## 🙋‍♂️ Author
 
-📜 License
-
-MIT — use freely, mod wisely, and may the Zone be kind.
-
-🧪 Author
-
-Maintained by @d0pe1AI Whisperer: GPT-4o + Codex
-
+Nico / `d0pe1` — 🧪 IT DevOps | 🧬 Chaos Gardener | 🛠 Modding Sadist
